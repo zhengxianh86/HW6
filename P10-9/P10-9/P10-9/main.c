@@ -5,24 +5,26 @@
 typedef struct card {
 	const char *face;
 	const char *suit;
-}Card;
+}Card;//設定Card自訂結構
 
-void fillDeck(Card * const wDeck, const char * wFace[],
-	const char * wSuit[]);
-void shuffle(Card * const wDeck);
-void deal(Card * const wDeck);
+void fillDeck(Card* const wDeck, const char* wFace[],
+	const char* wSuit[]);
+
+void shuffle(Card* const wDeck);
+void deal(Card* const wDeck);
 
 int main()
 {
 	Card deck[52];
-	const char* face[13] =
+	const char* face[13] =//設定牌面數字
 	{ "Ace","Deuce","Three","Four",
 	 "Five","Six","Seven","Eight",
 	 "Nine","Ten","Jack","Queen","King" };
 
-	const char *suit[4] = { "Hearts","Diamonds","Clubs","Spades" };
+	const char *suit[4] = //設定花色
+	{ "Hearts","Diamonds","Clubs","Spades" };
 
-	srand(time(NULL));
+	srand(time(NULL));//時間產生隨機
 	fillDeck(deck, face, suit);
 	shuffle(deck);
 	deal(deck);
@@ -30,7 +32,7 @@ int main()
 	return 0;
 }
 
-void fillDeck(Card * const wDeck, const char * wFace[],
+void fillDeck(Card * const wDeck, const char * wFace[],//填入花色及數字
 	const char * wSuit[]) {
 	int i;
 	for (i = 0; i <= 51; i++)
@@ -39,10 +41,9 @@ void fillDeck(Card * const wDeck, const char * wFace[],
 		wDeck[i].suit = wFace[i / 13];
 	}
 }
-void shuffle(Card * const wDeck) {
+void shuffle(Card * const wDeck) {//洗牌
 	int i, j;
 	Card temp;
-
 	for (i = 0; i <= 51; i++)
 	{
 		j = rand() % 52;
@@ -56,5 +57,5 @@ void deal(Card* const wDeck)
 	int i;
 	for (i = 0; i <= 51; i++)
 		printf("%5s of %-8s%s",wDeck[i].face,wDeck[i].suit,
-			(i+1)% 4 ? "  " : "\n");
+			(i+1)% 4 ? "  " : "\n");//印出隨機發牌後的結果
 }
